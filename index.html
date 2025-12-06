@@ -4,205 +4,326 @@
   <meta charset="UTF-8" />
   <title>pi2pi — P2P Long-Term Rental Protocol</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="pi2pi is a neutral, trustless P2P protocol for long-term rentals with onchain identity, funds, and intent verification." />
+
   <style>
-  * {
-    box-sizing: border-box;
-  }
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.09);
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --text-muted: #6b7280;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --shadow-soft: 0 32px 80px rgba(15, 23, 42, 0.9);
+    }
 
-  body {
-    margin: 0;
-    font-family: "Inter", system-ui, sans-serif;
-    color: #0f172a;
-    background: #f7f7f8;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #1e293b 0, #020617 45%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
 
-  .shell {
-    width: 100%;
-    max-width: 880px; /* УЖАЛ, чтобы текст стал собраннее */
-    margin: 0 auto;
-    padding: 40px 24px 0;
-    flex: 1;
-  }
+    .shell {
+      width: 100%;
+      max-width: 1040px;
+      background: linear-gradient(145deg, #020617 0, #020617 40%, #020617 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 28px 28px 20px;
+      position: relative;
+      overflow: hidden;
+    }
 
-  header {
-    margin-bottom: 32px;
-  }
+    /* лёгкое свечение в фоне */
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(129, 140, 248, 0.18), transparent 50%);
+      opacity: 0.8;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
 
-  .kicker {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #6b7280;
-    margin-bottom: 12px;
-  }
+    .inner {
+      position: relative;
+      z-index: 1;
+    }
 
-  h1 {
-    font-size: 48px;
-    font-weight: 700;
-    margin: 0 0 18px;
-  }
+    header {
+      margin-bottom: 28px;
+    }
 
-  .tagline {
-    font-size: 17px;
-    line-height: 1.55;
-    color: #374151;
-    margin: 0 0 32px;
-    max-width: 620px;
-  }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
 
-  main {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
+    h1 {
+      font-size: 32px;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      color: #f9fafb;
+    }
 
-  .card {
-    background: #fff;
-    border-radius: 14px;
-    border: 1px solid #e5e7eb;
-    padding: 26px 30px;
-    display: flex;
-    gap: 42px;
-    box-shadow: 0 6px 28px rgba(0,0,0,0.06); /* более аккуратная тень */
-  }
+    .lead {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 640px;
+    }
 
-  .col {
-    flex: 1;
-  }
+    .lead strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
 
-  .col-title {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #6b7280;
-    margin-bottom: 8px;
-  }
+    .layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+      margin-top: 10px;
+    }
 
-  .col h2 {
-    font-size: 20px;
-    margin: 0 0 14px;
-  }
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 10px;
+      }
 
-  .steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+      .shell {
+        padding: 22px 18px 16px;
+        border-radius: 18px;
+      }
 
-  .steps li {
-    margin-bottom: 10px;
-    font-size: 15px;
-    line-height: 1.5;
-  }
+      h1 {
+        font-size: 26px;
+      }
 
-  .step-title {
-    font-weight: 600;
-  }
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
 
-  .cta {
-    margin-top: 4px;
-    font-size: 15px;
-  }
+    .card {
+      background: radial-gradient(circle at top left, #020617 0, #020617 35%, #020617 100%);
+      border-radius: var(--radius-md);
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+    }
 
-  .cta a {
-    color: #111;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(0,0,0,0.3);
-  }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid transparent;
+      background:
+        linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(129, 140, 248, 0.1))
+        border-box;
+      mask: linear-gradient(#000 0 0) padding-box,
+            linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      opacity: 0.22;
+      pointer-events: none;
+    }
 
-  .cta a:hover {
-    border-bottom-color: transparent;
-  }
+    .card-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
 
-  footer {
-    border-top: 1px solid #e5e7eb;
-    background: #f3f4f6;
-    padding: 14px 24px 18px;
-    font-size: 12px;
-    color: #6b7280;
-  }
+    .card h2 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #e5e7eb;
+    }
 
-  .footer-inner {
-    max-width: 880px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-  }
-</style>
+    .flow-list {
+      list-style: none;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-soft);
+    }
+
+    .flow-item + .flow-item {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.4);
+    }
+
+    .flow-title {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .flow-title span {
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .flow-body {
+      display: block;
+      margin-left: 4px;
+    }
+
+    .copy {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+
+    .copy strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .cta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .cta a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.4);
+      padding-bottom: 1px;
+    }
+
+    .cta a:hover {
+      border-bottom-color: rgba(56, 189, 248, 0.9);
+    }
+
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.35);
+      margin-top: 18px;
+      padding-top: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    footer a:hover {
+      border-bottom-color: rgba(56, 189, 248, 0.7);
+    }
+  </style>
 </head>
+
 <body>
-  <div class="wrapper">
-    <div class="shell">
+  <main class="shell">
+    <div class="inner">
       <header>
-        <div class="kicker">P2P LONG-TERM RENTAL PROTOCOL</div>
+        <div class="eyebrow">P2P LONG-TERM RENTAL PROTOCOL</div>
         <h1>pi2pi</h1>
-        <p class="tagline">
-          <span>The simplest way for tenants and landlords to rent directly:</span>
-          <span>identity, funds, and intent verified onchain, no agents, no extra fees.</span>
-          <span>Just a neutral protocol ensuring that both sides do exactly what they promised — guaranteed by proofs.</span>
+
+        <p class="lead">
+          The simplest way for tenants and landlords to rent directly:
+          <strong>identity, funds, and intent verified onchain</strong>, no agents, no extra fees.
+          Just a neutral protocol ensuring that both sides do exactly what they promised —
+          <strong>guaranteed by proofs</strong>.
         </p>
       </header>
 
-      <main>
-        <section class="card">
-          <div class="col">
-            <div class="col-title">Flow</div>
-            <h2>How it works</h2>
-            <ul class="steps">
-              <li>
-                <span class="step-title">1. Verify.</span>
-                &nbsp;Identity, funds, and intent are verified onchain.
-              </li>
-              <li>
-                <span class="step-title">2. Match.</span>
-                &nbsp;Tenant and landlord connect directly — no intermediaries.
-              </li>
-              <li>
-                <span class="step-title">3. Execute.</span>
-                &nbsp;Agreement is secured by proofs; keys and payments follow the verified intent.
-              </li>
-            </ul>
-          </div>
+      <section class="layout">
+        <article class="card">
+          <div class="card-label">Flow</div>
+          <h2>How it works</h2>
 
-          <div class="col">
-            <div class="col-title">Rationale</div>
-            <h2>Why proofs matter</h2>
-            <p>
-              Cryptographic proofs replace intermediaries, reducing fraud, conflict, and misaligned incentives.
-              Instead of trusting a platform that can lie, freeze, or mark-up fees, both sides rely on verifiable
-              conditions that are enforced onchain.
-            </p>
-          </div>
-        </section>
+          <ul class="flow-list">
+            <li class="flow-item">
+              <div class="flow-title">
+                <span>1.</span>Verify
+              </div>
+              <span class="flow-body">
+                Identity, funds, and intent are verified onchain.
+              </span>
+            </li>
 
-        <p class="cta">
-          If you’re building infrastructure for trustless real-world use cases —&nbsp;
+            <li class="flow-item">
+              <div class="flow-title">
+                <span>2.</span>Match
+              </div>
+              <span class="flow-body">
+                Tenant and landlord connect directly — no intermediaries.
+              </span>
+            </li>
+
+            <li class="flow-item">
+              <div class="flow-title">
+                <span>3.</span>Execute
+              </div>
+              <span class="flow-body">
+                Agreement is secured by proofs; keys and payments follow the verified intent.
+              </span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Rationale</div>
+          <h2>Why proofs matter</h2>
+
+          <p class="copy">
+            Cryptographic proofs replace intermediaries, reducing fraud, conflict,
+            and misaligned incentives. Instead of trusting a platform that can lie,
+            freeze, or mark-up fees, both sides rely on <strong>verifiable conditions</strong>
+            that are enforced onchain.
+          </p>
+        </article>
+      </section>
+
+      <p class="cta">
+        If you're building infrastructure for trustless real-world use cases —
+        <a href="https://x.com/dim_ul" target="_blank" rel="noopener noreferrer">x://dim_ul</a>
+      </p>
+
+      <footer>
+        <span>© 2025 pi2pi — P2P long-term rental protocol.</span>
+        <span>Contact:
           <a href="https://x.com/dim_ul" target="_blank" rel="noopener noreferrer">x://dim_ul</a>
-        </p>
-      </main>
+        </span>
+      </footer>
     </div>
-
-    <footer>
-      <div class="footer-inner">
-        <div>© 2025 pi2pi — P2P long-term rental protocol.</div>
-        <div>
-          Contact:&nbsp;
-          <a class="footer-link" href="https://x.com/dim_ul" target="_blank" rel="noopener noreferrer">
-            x://dim_ul
-          </a>
-        </div>
-      </div>
-    </footer>
-  </div>
+  </main>
 </body>
 </html>
