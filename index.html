@@ -16,51 +16,51 @@
       margin: 0;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
-      color: #111827;
-      background: #f5f5f7;
+      color: #0f172a;
+      background: #f3f4f6;
     }
 
     .wrapper {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
     }
 
     .shell {
       width: 100%;
       max-width: 960px;
-      padding: 32px 20px 16px;
+      margin: 0 auto;
+      padding: 20px 20px 0;
+      flex: 1 0 auto;
       display: flex;
       flex-direction: column;
-      flex: 1 0 auto;
     }
 
     header {
-      text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .kicker {
       font-size: 11px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: #6b7280;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     h1 {
       font-size: 40px;
       line-height: 1.1;
-      margin: 0 0 12px;
+      margin: 0 0 8px;
     }
 
     .tagline {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.5;
-      max-width: 720px;
-      margin: 0 auto 8px;
+      max-width: 640px;
       color: #374151;
+      margin: 0;
     }
 
     .tagline span {
@@ -71,39 +71,52 @@
       flex: 1 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
     }
 
-    .grid {
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      padding: 16px 20px;
       display: flex;
-      gap: 32px;
+      gap: 28px;
       align-items: flex-start;
       justify-content: space-between;
-      margin-top: 8px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
     }
 
-    .block {
+    .col {
       flex: 1 1 0;
       font-size: 14px;
       line-height: 1.6;
       color: #374151;
     }
 
-    .block h2 {
-      font-size: 16px;
+    .col-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .col h2 {
+      font-size: 18px;
       font-weight: 600;
       margin: 0 0 10px;
       color: #111827;
     }
 
     .steps {
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
     }
 
     .steps li + li {
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     .step-title {
@@ -111,17 +124,16 @@
     }
 
     .cta {
-      margin: 0;
       font-size: 14px;
-      text-align: center;
-      padding-top: 4px;
+      text-align: left;
+      margin: 4px 0 0;
       color: #111827;
     }
 
     .cta a {
       color: #111827;
       text-decoration: none;
-      border-bottom: 1px solid rgba(17, 24, 39, 0.25);
+      border-bottom: 1px solid rgba(17, 24, 39, 0.3);
     }
 
     .cta a:hover {
@@ -135,6 +147,7 @@
       padding: 10px 20px 14px;
       font-size: 11px;
       color: #6b7280;
+      flex-shrink: 0;
     }
 
     .footer-inner {
@@ -156,21 +169,26 @@
     }
 
     @media (max-width: 768px) {
+      .shell {
+        padding-top: 16px;
+      }
+
       h1 {
         font-size: 32px;
       }
 
-      .grid {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      header {
-        margin-bottom: 16px;
-      }
-
       .tagline span {
         display: inline;
+      }
+
+      .card {
+        flex-direction: column;
+        padding: 14px 16px;
+        gap: 16px;
+      }
+
+      .cta {
+        text-align: left;
       }
 
       .footer-inner {
@@ -194,8 +212,9 @@
       </header>
 
       <main>
-        <section class="grid">
-          <div class="block">
+        <section class="card">
+          <div class="col">
+            <div class="col-title">Flow</div>
             <h2>How it works</h2>
             <ul class="steps">
               <li>
@@ -213,12 +232,13 @@
             </ul>
           </div>
 
-          <div class="block">
+          <div class="col">
+            <div class="col-title">Rationale</div>
             <h2>Why proofs matter</h2>
             <p>
               Cryptographic proofs replace intermediaries, reducing fraud, conflict, and misaligned incentives.
-              Instead of trusting a platform, both sides rely on verifiable conditions that cannot be edited or
-              quietly changed.
+              Instead of trusting a platform that can lie, freeze, or mark-up fees, both sides rely on verifiable
+              conditions that are enforced onchain.
             </p>
           </div>
         </section>
