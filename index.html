@@ -127,6 +127,10 @@
       .layout {
         grid-template-columns: 1fr;
       }
+
+      .faq {
+        margin-top: 18px;
+      }
     }
 
     .card {
@@ -246,9 +250,63 @@
     footer a:hover {
       border-bottom-color: rgba(56, 189, 248, 0.7);
     }
+
+    /* FAQ section */
+    .faq {
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    .faq-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .faq-eyebrow {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .faq-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .faq-list {
+      list-style: none;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top left, #020617 0, #020617 35%, #020617 100%);
+      padding: 14px 16px 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+
+    .faq-item + .faq-item {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.35);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 2px;
+    }
+
+    .faq-answer {
+      color: var(--text-soft);
+    }
   </style>
   <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
 </head>
 <body>
   <main class="shell">
@@ -311,6 +369,49 @@
             that are enforced onchain.
           </p>
         </article>
+      </section>
+
+      <!-- FAQ section -->
+      <section class="faq" aria-labelledby="faq-heading">
+        <div class="faq-header">
+          <div>
+            <div class="faq-eyebrow">FAQ</div>
+            <div class="faq-title" id="faq-heading">What pi2pi is — and isn’t</div>
+          </div>
+        </div>
+
+        <ul class="faq-list">
+          <li class="faq-item">
+            <div class="faq-question">1. Is this a protocol or a platform?</div>
+            <div class="faq-answer">
+              It is a <strong>decentralized rental protocol</strong> with a global P2P long-term rental platform built on top of it.
+              The protocol provides trust. The platform provides the user experience.
+            </div>
+          </li>
+
+          <li class="faq-item">
+            <div class="faq-question">2. Does the platform charge any rental fees?</div>
+            <div class="faq-answer">
+              No. P2P rental transactions between users remain fee-free.
+            </div>
+          </li>
+
+          <li class="faq-item">
+            <div class="faq-question">3. Does the platform have a business model?</div>
+            <div class="faq-answer">
+              Yes. The platform has a sustainable economic model, but it <strong>does not charge rental fees</strong> and
+              <strong>does not act as an intermediary between users</strong>. Revenue is generated separately from rental payments
+              and does not increase costs for users.
+            </div>
+          </li>
+
+          <li class="faq-item">
+            <div class="faq-question">4. Does the protocol hold user funds?</div>
+            <div class="faq-answer">
+              No. Funds always remain fully controlled by the users.
+            </div>
+          </li>
+        </ul>
       </section>
 
       <p class="cta">
