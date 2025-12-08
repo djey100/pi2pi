@@ -53,7 +53,6 @@
       overflow: hidden;
     }
 
-    /* лёгкое свечение в фоне */
     .shell::before {
       content: "";
       position: absolute;
@@ -251,7 +250,6 @@
       border-bottom-color: rgba(56, 189, 248, 0.7);
     }
 
-    /* FAQ section */
     .faq {
       margin-top: 8px;
       margin-bottom: 12px;
@@ -305,9 +303,11 @@
       color: var(--text-soft);
     }
   </style>
+
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="shortcut icon" type="image/png" href="/favicon.png">
 </head>
+
 <body>
   <main class="shell">
     <div class="inner">
@@ -330,30 +330,18 @@
 
           <ul class="flow-list">
             <li class="flow-item">
-              <div class="flow-title">
-                <span>1.</span>Verify
-              </div>
-              <span class="flow-body">
-                Identity, funds, and intent are verified onchain.
-              </span>
+              <div class="flow-title"><span>1.</span>Verify</div>
+              <span class="flow-body">Identity, funds, and intent are verified onchain.</span>
             </li>
 
             <li class="flow-item">
-              <div class="flow-title">
-                <span>2.</span>Match
-              </div>
-              <span class="flow-body">
-                Tenant and landlord connect directly — no intermediaries.
-              </span>
+              <div class="flow-title"><span>2.</span>Match</div>
+              <span class="flow-body">Tenant and landlord connect directly — no intermediaries.</span>
             </li>
 
             <li class="flow-item">
-              <div class="flow-title">
-                <span>3.</span>Execute
-              </div>
-              <span class="flow-body">
-                Agreement is secured by proofs; keys and payments follow the verified intent.
-              </span>
+              <div class="flow-title"><span>3.</span>Execute</div>
+              <span class="flow-body">Agreement is secured by proofs; keys and payments follow the verified intent.</span>
             </li>
           </ul>
         </article>
@@ -361,7 +349,6 @@
         <article class="card">
           <div class="card-label">Rationale</div>
           <h2>Why proofs matter</h2>
-
           <p class="copy">
             Cryptographic proofs replace intermediaries, reducing fraud, conflict,
             and misaligned incentives. Instead of trusting a platform that can lie,
@@ -391,9 +378,7 @@
 
           <li class="faq-item">
             <div class="faq-question">2. Does the platform charge any rental fees?</div>
-            <div class="faq-answer">
-              No. P2P rental transactions between users remain fee-free.
-            </div>
+            <div class="faq-answer">No. P2P rental transactions between users remain fee-free.</div>
           </li>
 
           <li class="faq-item">
@@ -407,8 +392,13 @@
 
           <li class="faq-item">
             <div class="faq-question">4. Does the protocol hold user funds?</div>
+            <div class="faq-answer">No. Funds always remain fully controlled by the users.</div>
+          </li>
+
+          <li class="faq-item">
+            <div class="faq-question">5. When will there be a token?</div>
             <div class="faq-answer">
-              No. Funds always remain fully controlled by the users.
+              There will be no token. pi2pi does not require a token for operation and does not use one for incentives, fees, or governance.
             </div>
           </li>
         </ul>
